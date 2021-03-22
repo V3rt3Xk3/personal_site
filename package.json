@@ -4,7 +4,8 @@
   "description": "My very own NodeJs WebApp",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/V3rt3Xk3/personal_site/issues"
   },
-  "homepage": "https://github.com/V3rt3Xk3/personal_site#readme"
+  "homepage": "https://github.com/V3rt3Xk3/personal_site#readme",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
 }
