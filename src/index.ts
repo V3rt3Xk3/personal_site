@@ -28,7 +28,7 @@ dbClient.connect(function (err) {
 	console.log("Connected successfully to server");
 	console.log(SiteKeys.dbName);
 
-	const db = client.db(SiteKeys.dbName);
+	const db = dbClient.db(SiteKeys.dbName);
 
 	dbClient.close();
 });
