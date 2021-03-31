@@ -1,17 +1,7 @@
+//Setting up express
 import express from "express";
-
-const app = express();
-
-// Middlewares
-
-// Routes
-app.get("/", (_request, _response) => {
-	_response.send("We are on home");
-});
-
-// Listening for a port
-app.listen(3000);
-
+const postsRoute = require("./routes/posts");
+const getsRoute = require("./routes/gets");
 //Setting up the DB
 import { MongoClient } from "mongodb";
 import assert from "assert";
@@ -32,3 +22,11 @@ dbClient.connect(function (err) {
 
 	dbClient.close();
 });
+
+const app = express();
+
+//Route MIddlewares
+app.use("/posts", postsRoute);
+app.use("/gets", getsRoute);
+// Listening for a port
+app.listen(3000);
