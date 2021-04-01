@@ -21,6 +21,11 @@ Mongoose.connect(
 		console.log("connected to DB");
 	}
 );
+const dbConnection = Mongoose.connection;
+dbConnection.on(
+	"error",
+	console.error.bind(console, "MongoDB connection ERROR:")
+);
 
 // These 3 lines intialize and set the port for the app
 const app = express();
