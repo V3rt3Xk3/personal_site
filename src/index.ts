@@ -4,25 +4,17 @@ const postsRoute = require("./routes/posts");
 const getsRoute = require("./routes/gets");
 //Setting up the DB
 // FIXME: Check out Mongoose for starters
-import { MongoClient } from "mongodb";
-import assert from "assert";
+import mongoose from "mongoose";
 import { SiteKeys } from "./site_keys";
 
-// Create a new MongoClient
-const dbClient: MongoClient = new MongoClient(SiteKeys.dbURL, {
-	useUnifiedTopology: true,
-});
-
-// Use connect method to connect to the Server
-dbClient.connect(function (err) {
-	assert.equal(null, err);
-	console.log("Connected successfully to server");
-	console.log(SiteKeys.dbName);
-
-	const db = dbClient.db(SiteKeys.dbName);
-
-	dbClient.close();
-});
+//DB setup
+mongoose.connect(
+	SiteKeys.dbURL,
+	{ useNewUrlParser: true, useUnifiedTopology: true },
+	() => {
+		console.log("connected to DB");
+	}
+);
 
 const app = express();
 
