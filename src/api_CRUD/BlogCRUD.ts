@@ -58,7 +58,7 @@ BlogCRUD.patch("/updatebyblogid/:blogId", async (_request, _response) => {
 // blog DELETES - DELETE
 BlogCRUD.delete("/deleteblogbyid/:blogId", async (_request, _response) => {
 	try {
-		const removedBlogEntry = await BlogPost.remove({
+		const removedBlogEntry = await BlogPost.deleteOne({
 			_id: _request.params.blogId,
 		});
 		_response.json(removedBlogEntry);
