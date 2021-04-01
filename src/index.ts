@@ -14,6 +14,7 @@ Mongoose.connect(
 		useUnifiedTopology: true,
 		user: SiteKeys.dbUserName,
 		pass: SiteKeys.dbUserPassword,
+		dbName: SiteKeys.dbName,
 	},
 	() => {
 		console.log("connected to DB");
