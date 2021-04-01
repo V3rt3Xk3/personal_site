@@ -1,5 +1,7 @@
 //Setting up express
 import express from "express";
+const cors = require("cors");
+import { normalizePort } from "./Utilities/normalizePort";
 const BlogCRUD = require("./api_CRUD/BlogCRUD");
 //Setting up the DB
 import Mongoose from "mongoose";
@@ -20,7 +22,11 @@ Mongoose.connect(
 	}
 );
 
+// These 3 lines intialize and set the port for the app
 const app = express();
+const apiPort = normalizePort(process.env.PORT || "9000");
+app.set("port", apiPort);
+app.use(cors());
 
 //Route MIddlewares
 //Posts
@@ -28,4 +34,4 @@ const app = express();
 app.use("/blogmethods", express.json({ limit: "1mb" }));
 app.use("/blogmethods", BlogCRUD);
 // Listening for a port
-app.listen(3000);
+app.listen(app.get("port"));
