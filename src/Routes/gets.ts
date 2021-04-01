@@ -13,4 +13,13 @@ getsRoute.get("/blogbyid/:blogId", async (_request, _response) => {
 	}
 });
 
+getsRoute.get("/blogs", async (_request, _response) => {
+	try {
+		const blogEntry = await BlogPost.find();
+		_response.json(blogEntry);
+	} catch (_error) {
+		_response.json({ message: _error });
+	}
+});
+
 module.exports = getsRoute;
