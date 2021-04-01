@@ -1,16 +1,20 @@
 //Setting up express
 import express from "express";
-const postsRoute = require("./routes/posts");
-const getsRoute = require("./routes/gets");
+const getsRoute = require("./Routes/gets");
+const postsRoute = require("./Routes/posts");
 //Setting up the DB
-// FIXME: Check out Mongoose for starters
-import mongoose from "mongoose";
+import Mongoose from "mongoose";
 import { SiteKeys } from "./site_keys";
 
 //DB setup
-mongoose.connect(
+Mongoose.connect(
 	SiteKeys.dbURL,
-	{ useNewUrlParser: true, useUnifiedTopology: true },
+	{
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+		user: SiteKeys.dbUserName,
+		pass: SiteKeys.dbUserPassword,
+	},
 	() => {
 		console.log("connected to DB");
 	}
@@ -19,7 +23,12 @@ mongoose.connect(
 const app = express();
 
 //Route MIddlewares
+//Posts
+// i am unsure whether this is the best way to do it
 app.use("/posts", postsRoute);
+app.use("/posts", express.json({ limit: "1mb" }));
+
+//Gets
 app.use("/gets", getsRoute);
 // Listening for a port
 app.listen(3000);
