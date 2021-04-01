@@ -3,7 +3,25 @@ import BlogPost from "../DataModels/BlogPostModel";
 
 const BlogCRUD: Router = express.Router();
 
-// Blog GETS
+// Blog POSTS - CREATE
+
+BlogCRUD.post("/blog_insert", async (_request, _response) => {
+	console.log(_request.body);
+
+	const post = new BlogPost({
+		title: _request.body.title,
+		content: _request.body.content,
+	});
+
+	try {
+		const savedPost = await post.save();
+		_response.json(savedPost);
+	} catch (_error) {
+		_response.json({ message: _error });
+	}
+});
+
+// Blog GETS - RETRIEVE
 BlogCRUD.get("/blogs", async (_request, _response) => {
 	try {
 		const blogEntry = await BlogPost.find();
@@ -22,25 +40,7 @@ BlogCRUD.get("/blogbyid/:blogId", async (_request, _response) => {
 	}
 });
 
-// Blog POSTS
-
-BlogCRUD.post("/blog_insert", async (_request, _response) => {
-	console.log(_request.body);
-
-	const post = new BlogPost({
-		title: _request.body.title,
-		content: _request.body.content,
-	});
-
-	try {
-		const savedPost = await post.save();
-		_response.json(savedPost);
-	} catch (_error) {
-		_response.json({ message: _error });
-	}
-});
-
-// blog UPDATES
+// blog UPDATES - UPDATE
 BlogCRUD.patch("/updatebyblogid/:blogId", async (_request, _response) => {
 	try {
 		const updateBlogEntry = await BlogPost.updateOne(
@@ -55,7 +55,7 @@ BlogCRUD.patch("/updatebyblogid/:blogId", async (_request, _response) => {
 	}
 });
 
-// blog DELETES
+// blog DELETES - DELETE
 BlogCRUD.delete("/deleteblogbyid/:blogId", async (_request, _response) => {
 	try {
 		const removedBlogEntry = await BlogPost.remove({
