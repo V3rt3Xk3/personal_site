@@ -25,8 +25,8 @@ const app = express();
 //Route MIddlewares
 //Posts
 // i am unsure whether this is the best way to do it
-app.use("/posts", postsRoute);
 app.use("/posts", express.json({ limit: "1mb" }));
+app.use("/posts", postsRoute);
 
 //Gets
 app.use("/gets", getsRoute);
