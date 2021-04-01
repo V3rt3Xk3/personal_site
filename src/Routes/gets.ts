@@ -1,10 +1,16 @@
 import express, { Router } from "express";
+import BlogPost from "../DataModels/BlogPostModel";
 
 const getsRoute: Router = express.Router();
 
 // Routes
-getsRoute.get("/", (_request, _response) => {
-	_response.send("We are on home");
+getsRoute.get("/blogbyid/:blogId", async (_request, _response) => {
+	try {
+		const blogEntry = await BlogPost.findById(_request.params.blogId);
+		_response.json(blogEntry);
+	} catch (_error) {
+		_response.json({ message: _error });
+	}
 });
 
 module.exports = getsRoute;
