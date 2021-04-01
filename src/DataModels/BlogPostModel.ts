@@ -1,6 +1,12 @@
 import Mongoose from "mongoose";
 
-const BlogPostSchema = new Mongoose.Schema({
+export interface IBlogPost extends Mongoose.Document {
+	title: string;
+	content: string;
+	date: Date;
+}
+
+const BlogPostSchema: Mongoose.Schema = new Mongoose.Schema({
 	title: {
 		type: String,
 		required: true,
@@ -14,3 +20,5 @@ const BlogPostSchema = new Mongoose.Schema({
 		default: Date.now,
 	},
 });
+
+export default Mongoose.model<IBlogPost>("BlogPost", BlogPostSchema);
