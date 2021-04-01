@@ -1,38 +1,29 @@
 import React from "react";
-import { Blog } from "./Core/Models/Blog";
+import {Link, Route, BrowserRouter as Router} from "react-router-dom";
 import logo from "./logo.svg";
 import "./App.css";
-import BlogService from "./Core/Services/BlogService";
-import { BlogCard } from "./Components/BlogCard";
+import RecentBlogs from "./Pages/RecentBlogs";
 
 
-
-interface IBlogProps {
-	match: any;
-}
 
 interface IBlogState{
 	isLoading: boolean;
-	blogs: Array<Blog>;
 }
 
-class App extends React.Component<IBlogProps, IBlogState> {
+class App extends React.Component<any, IBlogState> {
 
 	constructor(props:any) {
 		super(props);
 
 		this.state = {
 			isLoading: true,
-			blogs: [],
 		}
 	}
 
 	async componentDidMount(){
-		const blogs = await BlogService.GetBlogs();
 
 		this.setState({
 			isLoading: false,
-			blogs: blogs,
 		})
 	}
 
@@ -45,13 +36,16 @@ class App extends React.Component<IBlogProps, IBlogState> {
 			)
 		}
 		return (
-			<main>
-				{this.state.blogs.map((blog) => {
-					return (
-						<BlogCard blog={blog} key={blog._id} />
-					)
-				})}
-			</main>
+			<div className="site-wrapper">
+			<Router>
+				<nav className="nav-container">
+					<Link className="nav-item" to="/RecentBlogPosts">Recent blog posts</Link>
+				</nav>
+				<main>
+					<Route exact path="/RecentBlogPosts" component={() => (<RecentBlogs/>)}/>
+				</main>
+			</Router>
+			</div>
 		);
 	}
 }
