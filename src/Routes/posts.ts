@@ -4,7 +4,7 @@ import BlogPost from "../DataModels/BlogPostModel";
 const postsRoute: Router = express.Router();
 
 // Routes
-postsRoute.post("/blog_insert", (_request, _response) => {
+postsRoute.post("/blog_insert", async (_request, _response) => {
 	console.log(_request.body);
 
 	const post = new BlogPost({
@@ -12,14 +12,12 @@ postsRoute.post("/blog_insert", (_request, _response) => {
 		content: _request.body.content,
 	});
 
-	post
-		.save()
-		.then((data) => {
-			_response.json(data);
-		})
-		.catch((error) => {
-			_response.status(200);
-		});
+	try {
+		const savedPost = await post.save();
+		_response.json(savedPost);
+	} catch (_error) {
+		_response.json({ message: _error });
+	}
 });
 postsRoute.post("/special", (_request, _response) => {
 	console.log(_request.body);
