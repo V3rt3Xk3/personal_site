@@ -1,0 +1,27 @@
+body {
+	background: pink;
+}
+
+div.site-wrapper {
+	max-width: 80%;
+	margin: auto;
+	display: block;
+	background: white;
+}
+
+nav.nav-container {
+	display: block;
+	background: rgba(100, 100, 255, 1);
+}
+
+.nav-item {
+	display: inline-block;
+	padding: 1rem 1rem;
+	text-decoration: none;
+	color: black;
+	font-size: 14pt;
+}
+
+.nav-item:hover {
+	background: rgba(150, 150, 255, 1);
+}
