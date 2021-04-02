@@ -15,11 +15,8 @@ const dbHandler = require("./../../dbHandler.ts");
 const PORT = normalizePort(process.env.PORT || "9000");
 const HOST = `http://localhost:${PORT}`;
 
-const rawTestBlogData = fs.readFileSync(
-	"./src/Tests/Blogs/testBlogData.json",
-	"utf8"
-);
-const testBlogData = JSON.parse(rawTestBlogData).BlogPosts;
+import { Data } from "./testBlogData";
+const testBlogData = Data.BlogPosts;
 
 describe("api", () => {
 	describe("BlogMethods API", () => {
