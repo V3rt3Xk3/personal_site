@@ -94,32 +94,32 @@ describe("api", () => {
 				})
 				.expect(200, done);
 		});
-		// //CRUD Update
-		// it(
-		// 	"/updatebyblogid/:blogId " +
-		// 		"- Should update blogpost with title: 'TITLE2'",
-		// 	(done) => {
-		// 		const updateRequest = {
-		// 			title: "UPDATED TITLE2",
-		// 		};
-		// 		request(HOST)
-		// 			.patch("/blogmethods//updatebyblogid/2")
-		// 			.send(updateRequest)
-		// 			.expect((_response) => {
-		// 				const responseBody = _response.body;
-		// 				expect(responseBody).to.contain.property("_id");
-		// 				expect(responseBody).to.contain.property("title");
-		// 				expect(responseBody).to.contain.property("content");
-		// 				expect(responseBody).to.contain.property("date");
-		// 			})
-		// 			.expect(() => {
-		// 				BlogPost.find({ title: "UPDATED TITLE2" }).then((_queryResult) => {
-		// 					expect(_queryResult).to.have.length(1);
-		// 				});
-		// 			})
-		// 			.expect(200, done);
-		// 	}
-		// );
+		//CRUD Update
+		it(
+			"/updatebyblogid/:blogId " +
+				"- Should update blogpost with title: 'TITLE2'",
+			(done) => {
+				const updateRequest = {
+					title: "UPDATED TITLE2",
+				};
+				request(HOST)
+					.patch("/blogmethods//updatebyblogid/000000000000000000000002")
+					.send(updateRequest)
+					.expect(() => {
+						// Check whether the new title is alive
+						BlogPost.find({ title: "UPDATED TITLE2" }).then((_queryResult) => {
+							expect(_queryResult).to.have.length(1);
+						});
+					})
+					.expect(() => {
+						// Checks whether the old title is alive
+						BlogPost.find({ title: "TITLE2" }).then((_queryResult) => {
+							expect(_queryResult).to.be.empty;
+						});
+					})
+					.expect(200, done);
+			}
+		);
 		// //CRUD Delete
 		// it(
 		// 	"/blogmethods/deleteblogbytitle/:blogTitle " +
