@@ -16,32 +16,39 @@ const PORT = normalizePort(process.env.PORT || "9000");
 const HOST = `http://localhost:${PORT}`;
 
 describe("api", () => {
-	before((done) => {
-		Mongoose.connection.collections["blogposts"]
-			.drop()
-			.then(
-				() => {
-					console.log("Dropped blogposts collection");
-					const rawTestBlogData = fs.readFileSync(
-						"./Tests/Blogs/testBlogData.json",
-						"utf8"
-					);
-					const testBlogData = JSON.parse(rawTestBlogData);
-					BlogPost.insertMany(testBlogData.BlogPosts);
-					console.log("Inserted 2 documents");
-				},
-				(_error) => {
-					throw _error;
-				}
-			)
-			.then(() => {
-				return done();
-			});
+	// before((done) => {
+	// 	dbHandler.dbConnect().then(() => {
+	// 		return done();
+	// 	});
+	// });
+	beforeEach((done) => {
+		Mongoose.connection.collections["blogposts"].drop().then(
+			() => {
+				// console.log("Dropped blogposts collection");
+				const rawTestBlogData = fs.readFileSync(
+					"./Tests/Blogs/testBlogData.json",
+					"utf8"
+				);
+				const testBlogData = JSON.parse(rawTestBlogData);
+				BlogPost.insertMany(testBlogData.BlogPosts).then(
+					() => {
+						// console.log("Inserted 2 documents");
+						done();
+					},
+					(_error) => {
+						throw _error;
+					}
+				);
+			},
+			(_error) => {
+				throw _error;
+			}
+		);
 	});
 
 	after((done) => {
 		dbHandler.dbClose();
-		return done();
+		done();
 	});
 
 	it("Should accept valid data", (done) => {
@@ -67,9 +74,9 @@ describe("api", () => {
 			.get("/blogmethods/blogs")
 			.expect((_response) => {
 				const responseBody = _response.body;
-				expect(responseBody).to.have.lengthOf(3);
+				expect(responseBody).to.have.lengthOf(2);
 				// This one test whether there is an element in the array, with TEST TITLE
-				expect(responseBody.some(Array, { title: "TEST TITLE" })).to.be.true;
+				expect(responseBody.some(Array, { title: "TITLE2" })).to.be.true;
 			})
 			.expect(200, done);
 	});
