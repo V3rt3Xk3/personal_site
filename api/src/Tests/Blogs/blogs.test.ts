@@ -97,7 +97,7 @@ describe("api", () => {
 		//CRUD Update
 		it(
 			"/updatebyblogid/:blogId " +
-				"- Should update blogpost with title: 'TITLE2'",
+				"- Should update blogpost with title: 'TITLE2' to 'UPDATED TITLE2'",
 			(done) => {
 				const updateRequest = {
 					title: "UPDATED TITLE2",
@@ -120,27 +120,27 @@ describe("api", () => {
 					.expect(200, done);
 			}
 		);
-		// //CRUD Delete
-		// it(
-		// 	"/blogmethods/deleteblogbytitle/:blogTitle " +
-		// 		"- Should delete an element in mock DB (Title: 'TITLE2)'",
-		// 	(done) => {
-		// 		request(HOST)
-		// 			.delete("/blogmethods/deleteblogbytitle/TITLE2")
-		// 			.expect(() => {
-		// 				BlogPost.countDocuments({}, (_error, _count) => {})
-		// 					.then((_count) => {
-		// 						expect(_count).to.equal(2);
-		// 					})
-		// 					.then(() => {
-		// 						BlogPost.find({ title: "TITLE2" }).then((_queryResult) => {
-		// 							//This returns an empty array: []
-		// 							expect(_queryResult).to.be.empty;
-		// 						});
-		// 					});
-		// 			})
-		// 			.expect(200, done);
-		// 	}
-		// );
+		//CRUD Delete
+		it(
+			"/blogmethods/deleteblogbyid/:blogId " +
+				"- Should delete an element in mock DB (Title: 'TITLE2)'",
+			(done) => {
+				request(HOST)
+					.delete("/blogmethods/deleteblogbyid/000000000000000000000002")
+					.expect(() => {
+						BlogPost.countDocuments({}, (_error, _count) => {})
+							.then((_count) => {
+								expect(_count).to.equal(2);
+							})
+							.then(() => {
+								BlogPost.find({ title: "TITLE2" }).then((_queryResult) => {
+									//This returns an empty array: []
+									expect(_queryResult).to.be.empty;
+								});
+							});
+					})
+					.expect(200, done);
+			}
+		);
 	});
 });
