@@ -62,23 +62,27 @@ describe("api", () => {
 					expect(responseBody).to.contain.property("content");
 					expect(responseBody).to.contain.property("date");
 				})
+				.expect(() => {
+					BlogPost.countDocuments({}).then((_count) => {
+						expect(_count).to.equal(4);
+					});
+				})
 				.expect(200, done);
 		});
 
-		it("/blogmethods/blogs - Should retrieve the number of records in mock DB", (done) => {
+		it("/blogmethods/blogs - Should retrieve the number of records in mock DB (3) And return with OK (200)", (done) => {
 			request(HOST)
 				.get("/blogmethods/blogs")
 				.expect((_response) => {
 					const responseBody = _response.body;
 					expect(responseBody).to.have.lengthOf(3);
 					// This one test whether there is an element in the array, with TEST TITLE
-					expect(responseBody.some(Array, { title: "TITLE2" })).to.be.true;
 				})
 				.expect(200, done);
 		});
 		it(
 			"/blogmethods/deleteblogbytitle/:blogTitle " +
-				"- Should delete an element in mock DB (Title: 'TITLE2'",
+				"- Should delete an element in mock DB (Title: 'TITLE2)'",
 			(done) => {
 				request(HOST)
 					.delete("/blogmethods/deleteblogbytitle/TITLE2")
@@ -88,13 +92,11 @@ describe("api", () => {
 								expect(_count).to.equal(2);
 							})
 							.then(() => {
-								BlogPost.find().then((_queryResult) => {
-									expect(_queryResult).some(Array, { title: "TITLE2" }).to.be
-										.false;
+								BlogPost.find({ title: "TITLE2" }).then((_queryResult) => {
+									//This returns an empty array: []
+									expect(_queryResult).to.be.empty;
 								});
 							});
-
-						// This one test whether there is an element in the array, with TEST TITLE
 					})
 					.expect(200, done);
 			}
