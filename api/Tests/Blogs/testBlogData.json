@@ -1,10 +1,12 @@
-[
 {
-    "title": "TITLE1",
-    "content": "CONTENT1"
-},
-{
-    "title": "TITLE2",
-    "content": "CONTENT2"
+	"BlogPosts": [
+		{
+			"title": "TITLE1",
+			"content": "CONTENT1"
+		},
+		{
+			"title": "TITLE2",
+			"content": "CONTENT2"
+		}
+	]
 }
-]

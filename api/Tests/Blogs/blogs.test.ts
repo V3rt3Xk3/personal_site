@@ -27,7 +27,7 @@ describe("api", () => {
 						"utf8"
 					);
 					const testBlogData = JSON.parse(rawTestBlogData);
-					BlogPost.insertMany(testBlogData);
+					BlogPost.insertMany(testBlogData.BlogPosts);
 					console.log("Inserted 2 documents");
 				},
 				(_error) => {
