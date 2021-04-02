@@ -67,18 +67,4 @@ BlogCRUD.delete("/deleteblogbyid/:blogId", async (_request, _response) => {
 	}
 });
 
-BlogCRUD.delete(
-	"/deleteblogbytitle/:blogTitle",
-	async (_request, _response) => {
-		try {
-			const removedBlogEntry = await BlogPost.deleteOne({
-				title: _request.params.blogTitle,
-			});
-			_response.json(removedBlogEntry);
-		} catch (_error) {
-			_response.json({ message: _error });
-		}
-	}
-);
-
 module.exports = BlogCRUD;
