@@ -5,7 +5,7 @@ const BlogCRUD: Router = express.Router();
 
 // Blog POSTS - CREATE
 
-BlogCRUD.post("/blog_insert", async (_request, _response) => {
+BlogCRUD.post("/bloginsertone", async (_request, _response) => {
 	console.log(_request.body);
 
 	const post = new BlogPost({
