@@ -4,7 +4,7 @@ import BlogPost from "../DataModels/BlogPostModel";
 const BlogCRUD: Router = express.Router();
 
 // Blog POSTS - CREATE
-
+// Have a test
 BlogCRUD.post("/bloginsertone", async (_request, _response) => {
 	console.log(_request.body);
 
@@ -22,6 +22,7 @@ BlogCRUD.post("/bloginsertone", async (_request, _response) => {
 });
 
 // Blog GETS - RETRIEVE
+// Have a test
 BlogCRUD.get("/blogs", async (_request, _response) => {
 	try {
 		const blogEntry = await BlogPost.find();
@@ -31,6 +32,7 @@ BlogCRUD.get("/blogs", async (_request, _response) => {
 	}
 });
 
+// Have a test
 BlogCRUD.get("/blogbyid/:blogId", async (_request, _response) => {
 	try {
 		const blogEntry = await BlogPost.findById(_request.params.blogId);
@@ -41,6 +43,7 @@ BlogCRUD.get("/blogbyid/:blogId", async (_request, _response) => {
 });
 
 // blog UPDATES - UPDATE
+// Have a test
 BlogCRUD.patch("/updatebyblogid/:blogId", async (_request, _response) => {
 	try {
 		const updateBlogEntry = await BlogPost.updateOne(
@@ -56,6 +59,7 @@ BlogCRUD.patch("/updatebyblogid/:blogId", async (_request, _response) => {
 });
 
 // blog DELETES - DELETE
+// Have a test
 BlogCRUD.delete("/deleteblogbyid/:blogId", async (_request, _response) => {
 	try {
 		const removedBlogEntry = await BlogPost.deleteOne({
