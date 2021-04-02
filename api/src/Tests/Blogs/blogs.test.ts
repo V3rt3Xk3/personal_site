@@ -94,6 +94,24 @@ describe("api", () => {
 				})
 				.expect(200, done);
 		});
+		it("/blogmethods/blogbyid/:blogId - Should retrieve the given recrod of blog posts by Id And return with OK (200)", (done) => {
+			request(HOST)
+				.get("/blogmethods/blogbyid/000000000000000000000002")
+				.expect((_response) => {
+					const responseBody = _response.body;
+					expect(responseBody).to.include({
+						title: "TITLE2",
+						content: "CONTENT2",
+					});
+					expect(responseBody).to.be.an("Object");
+					expect(responseBody).to.contain.property("_id");
+					expect(responseBody).to.contain.property("title");
+					expect(responseBody).to.contain.property("content");
+					expect(responseBody).to.contain.property("date");
+					// This one test whether there is an element in the array, with TEST TITLE
+				})
+				.expect(200, done);
+		});
 		//CRUD Update
 		it(
 			"/updatebyblogid/:blogId " +
