@@ -1,0 +1,79 @@
+.row {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+@for $i from 1 through 12 {
+	.col-#{$i} {
+		flex: 0 0 (100% / (12 / $i));
+	}
+}
+
+main.home-wrapper {
+	text-align: center;
+	max-width: 80%;
+	min-height: 400vh;
+	margin: auto;
+	margin-top: -2em;
+	display: block;
+	background: white;
+	background-image: url("./home_bg.jpg");
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+.text-center {
+	text-align: center;
+}
+
+h1 {
+	font-size: 36pt;
+}
+
+#ProfilePic {
+	margin-top: 5em;
+	width: 20em;
+	height: 20em;
+	border-radius: 50%;
+}
+
+.text-justify {
+	text-align: justify;
+}
+
+#bio-header {
+	margin-top: 4em;
+}
+h2 {
+	font-size: 30pt;
+}
+
+.birth {
+	margin-top: 7em;
+	padding-left: 2em;
+}
+
+.bme {
+	margin-top: 8em;
+	padding-right: 2em;
+}
+
+.aau {
+	margin-top: 9em;
+	padding-left: 2em;
+}
+
+.oe {
+	margin-top: 9em;
+	padding-right: 3em;
+}
+
+.destination {
+	margin-top: 18em;
+	background: rgba(255, 0, 0, 0.4);
+	height: 35em;
+}
+
+.bottom-placeholder {
+	height: 10em;
+}

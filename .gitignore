@@ -2,6 +2,9 @@
 site_keys.ts
 site_keys.js
 
+#images
+*.jpg
+
 # Logs
 logs
 *.log

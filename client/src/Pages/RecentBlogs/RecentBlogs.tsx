@@ -1,8 +1,9 @@
 import React from "react";
-import BlogService from "./../Core/Services/BlogService";
-import { BlogCard } from "./../Components/BlogCard";
-import { Blog } from "../Core/Models/Blog";
-import logo from "../logo.svg"
+import BlogService from "./../../Core/Services/BlogService";
+import { BlogCard } from "./../../Components/BlogCard";
+import { Blog } from "./../../Core/Models/Blog";
+import logo from "./../../logo.svg"
+
 
 
 

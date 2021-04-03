@@ -1,29 +1,38 @@
 body {
-  background: pink;
-}
-
-div.site-wrapper {
-  max-width: 80%;
-  margin: auto;
-  display: block;
   background: white;
 }
 
 nav.nav-container {
   display: block;
-  background: #6464ff;
+  position: relative;
+  background: #323232;
+  text-align: center;
 }
 
 .nav-item {
   display: inline-block;
+  width: 8em;
   padding: 1rem 1rem;
   text-decoration: none;
-  color: black;
-  font-size: 14pt;
+  color: white;
+  font-size: 16pt;
+  font-weight: bold;
 }
 
 .nav-item:hover {
-  background: #9696ff;
+  background: #969696;
+  color: black;
+}
+
+.footer {
+  background: #323232;
+  display: block;
+  height: 5em;
+}
+
+.footer p {
+  width: 80%;
+  margin: auto;
 }
 
 /*# sourceMappingURL=App.css.map */
